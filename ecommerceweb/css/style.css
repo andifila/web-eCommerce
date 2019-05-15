@@ -1,0 +1,28 @@
+*{
+  font-size: 12px;
+  font-family: sans-serif;
+}
+ 
+body{
+  background-image: url(test.jpeg);
+  background-size: 1450px auto;*/
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  /*background-position: center;*/
+}
+h1{
+  font-size: 36px;
+  margin: 0;
+}
+ 
+#wrapper{
+  width: 950px;
+  margin: auto;
+  background-color:rgba(255,255,255,0.8);
+  border-radius: 50px;
+}
+#header{
+  height: auto;
+  background: transparent;
+  margin-top: 12%;
+}
