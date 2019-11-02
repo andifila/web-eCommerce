@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Okt 2018 pada 03.35
--- Versi server: 10.1.31-MariaDB
--- Versi PHP: 7.2.4
+-- Generation Time: Nov 02, 2019 at 04:45 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `brands`
+-- Table structure for table `brands`
 --
 
 CREATE TABLE `brands` (
@@ -34,7 +34,7 @@ CREATE TABLE `brands` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `brands`
+-- Dumping data for table `brands`
 --
 
 INSERT INTO `brands` (`brand_id`, `brand_title`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `brands` (`brand_id`, `brand_title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cart`
+-- Table structure for table `cart`
 --
 
 CREATE TABLE `cart` (
@@ -64,7 +64,7 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `cart`
+-- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`id`, `p_id`, `ip_add`, `user_id`, `product_title`, `product_image`, `qty`, `price`, `total_amt`) VALUES
@@ -75,12 +75,14 @@ INSERT INTO `cart` (`id`, `p_id`, `ip_add`, `user_id`, `product_title`, `product
 (5, 2, '0', 7, 'Gery Cokelat', '2.png', 2, 25000, 50000),
 (6, 1, '0', 7, 'Gournet Salted Egg Yolk', '1.png', 15, 5000, 75000),
 (7, 3, '0', 7, 'Kacang Garuda Rosta', '3.png', 1, 30000, 30000),
-(13, 1, '0', 8, 'Gournet Salted Egg Yolk', '1.png', 1, 5000, 5000);
+(13, 1, '0', 8, 'Gournet Salted Egg Yolk', '1.png', 1, 5000, 5000),
+(14, 1, '0', 1, 'Gournet Salted Egg Yolk', '1.png', 1, 5000, 5000),
+(15, 2, '0', 1, 'Gery Cokelat', '2.png', 1, 25000, 25000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -89,7 +91,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
@@ -104,7 +106,7 @@ INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -119,7 +121,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`product_id`, `product_cat`, `product_brand`, `product_title`, `product_price`, `product_desc`, `product_image`, `product_keywords`) VALUES
@@ -136,7 +138,58 @@ INSERT INTO `products` (`product_id`, `product_cat`, `product_brand`, `product_t
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_info`
+-- Table structure for table `siswa`
+--
+
+CREATE TABLE `siswa` (
+  `nim` int(11) NOT NULL,
+  `nama` varchar(30) DEFAULT NULL,
+  `kota` varchar(30) DEFAULT NULL,
+  `kodepos` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `siswa`
+--
+
+INSERT INTO `siswa` (`nim`, `nama`, `kota`, `kodepos`) VALUES
+(3, 'Lala', 'Makassar', 0),
+(4, 'Delima', 'Medan', 0),
+(5, 'Dinra', 'Semarang', 0),
+(7, 'Diah', 'Krembung', 0),
+(8, 'Supadi', 'Lamongan', 0),
+(13, 'Muhammad Irfan Faishol', 'Sidoarjo', 0),
+(15, 'izza', 'mojokerto', 892738),
+(16, 'test', 'kota', 7298172);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(35) NOT NULL,
+  `password` varchar(35) NOT NULL,
+  `level` enum('penjual','admin','','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `level`) VALUES
+(8, 'irfan', '202cb962ac59075b964b07152d234b70', 'penjual'),
+(9, 'faishol', '202cb962ac59075b964b07152d234b70', 'admin'),
+(10, 'coba', '202cb962ac59075b964b07152d234b70', 'admin'),
+(11, 'penjual', '202cb962ac59075b964b07152d234b70', 'penjual'),
+(12, 'admin', '202cb962ac59075b964b07152d234b70', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_info`
 --
 
 CREATE TABLE `user_info` (
@@ -151,86 +204,103 @@ CREATE TABLE `user_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user_info`
+-- Dumping data for table `user_info`
 --
 
 INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address1`, `address2`) VALUES
-(1, 'demo', 'demo', 'demo@gmal.com', '12345', '123456789', 'Kolkata', 'VIP Road'),
-(2, 'Rizwan', 'Khan', 'rizwankhan.august16@gmail.com', '25f9e794323b453885f5181f1b624d0b', '9832268432', 'Hutton Road', 'Kolkata'),
-(3, 'Rizwan', 'Khan', 'salmankhan@gmail.com', '25f9e794323b453885f5181f1b624d0b', '8389080182', 'Hutton Road', 'Asansol'),
-(4, 'Andi', 'Fila', 'andifila@gmail.com', '285e08248bbf7b826fafb4b2643c24bd', '1234567890', 'Malang', 'Malang'),
-(5, 'Irfan', 'Faishol', 'irfanfaishol@gmail.com', '3fc0a7acf087f549ac2b266baf94b8b1', '1234567890', 'Malang', 'Malang'),
-(6, 'Andi', 'Fila', 'stiki@asidkia.com', '25d55ad283aa400af464c76d713c07ad', '1234567890', 'MLG', 'MLG'),
-(7, 'Agel', 'Firman', 'asdasd@adsdas.com', '25d55ad283aa400af464c76d713c07ad', '1234567893', 'asdas', 'dasdasda'),
-(8, 'Andi', 'Fila', 'stiki@stiki.com', 'e807f1fcf82d132f9bb018ca6738a19f', '1234567890', 'Mlg', 'mlg');
+(1, 'Andi', 'Fila', 'login@admin.com', 'e807f1fcf82d132f9bb018ca6738a19f', '1234567890', 'Mlg', 'mlg');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `brands`
+-- Indexes for table `brands`
 --
 ALTER TABLE `brands`
   ADD PRIMARY KEY (`brand_id`);
 
 --
--- Indeks untuk tabel `cart`
+-- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`cat_id`);
 
 --
--- Indeks untuk tabel `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- Indeks untuk tabel `user_info`
+-- Indexes for table `siswa`
+--
+ALTER TABLE `siswa`
+  ADD PRIMARY KEY (`nim`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_info`
 --
 ALTER TABLE `user_info`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `brands`
+-- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
   MODIFY `brand_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `cart`
+-- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `cat_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `product_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `user_info`
+-- AUTO_INCREMENT for table `siswa`
+--
+ALTER TABLE `siswa`
+  MODIFY `nim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
